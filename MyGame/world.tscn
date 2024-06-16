@@ -534,7 +534,7 @@ face_vertex_data = {
 [node name="Node3D" type="Node3D"]
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_8mpty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25096, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25096, 3.24048)
 
 [node name="Cyclops" type="Node3D" parent="."]
 
