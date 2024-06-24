@@ -14,3 +14,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25096, 3.24048)
 
 [node name="Gamemapyr12" parent="." instance=ExtResource("3_awkdx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02173, -0.797842, 2.80722)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.150346, 0.988633, 0, -0.988633, -0.150346, 6.51183, 34.6272, -0.777503)
