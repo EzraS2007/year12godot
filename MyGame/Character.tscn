@@ -108,6 +108,7 @@ func _physics_process(delta):
 		
 	if is_on_floor() and Input.is_action_pressed(\"sprint\"):
 		enter_sprint_state()
+
 	
 	move_and_slide()
 	wall_run(move_dir)
@@ -123,6 +124,9 @@ func _unhandled_input(event):
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, -1, 1)
+
+
+
 
 
 "
@@ -216,7 +220,7 @@ _data = {
 "crouch": SubResource("Animation_ens2n")
 }
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
 script = SubResource("GDScript_jccc3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -241,3 +245,5 @@ transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 
 libraries = {
 "": SubResource("AnimationLibrary_eiwak")
 }
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
