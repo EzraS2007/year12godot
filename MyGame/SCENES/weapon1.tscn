@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc07pypf7mnjw"]
+
+[ext_resource type="PackedScene" uid="uid://jsr6fibpe3ht" path="res://MODELS/bible.blend" id="1_2mpwk"]
+
+[node name="Weapon" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0776743, 0, 0.294516)
+
+[node name="bible" parent="." instance=ExtResource("1_2mpwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.154231, 0, -0.304318)

@@ -1,0 +1,249 @@
+[gd_scene load_steps=7 format=3 uid="uid://1au7io0bc6ur"]
+
+[sub_resource type="GDScript" id="GDScript_jccc3"]
+script/source = "extends CharacterBody3D
+@onready var head = $head
+@onready var camera = $head/Camera3D
+@export var speed = 6
+const WALK_SPEED = 5
+const SPRINT_SPEED = 7
+const CROUCH_SPEED = 3.0
+
+@onready var pcap = $CollisionShape3D
+var jumped = false
+@onready var mouse_sensitivity = 0.01
+const JUMP_VELOCITY = 5
+var gravity = 8
+@onready var right_wall_cast = $head/RightWallCast
+@onready var left_wall_cast = $head/LeftWallCast
+@export var jump_speed = 5
+@export var state = \"normal\"
+
+const BOB_FREQ = 2.0
+const BOB_AMP = 0.08
+var t_bob = 0.0
+
+func _ready():
+	$CrouchAnimation.play(\"RESET\")
+
+func wall_run(move_dir):
+	if Input.is_action_pressed(\"up\"):
+		if is_on_wall() and right_wall_cast.is_colliding() and velocity.y < 0:
+			gravity = 1
+		if is_on_wall() and left_wall_cast.is_colliding() and velocity.y < 0:
+			gravity = 1
+	if Input.is_action_just_pressed(\"jump\") and jumped == false and not is_on_floor():
+		if is_on_wall():
+			if left_wall_cast.is_colliding():
+				velocity = head.transform.basis * Vector3.RIGHT * 7 + move_dir
+				velocity.y += 4
+				jumped = true
+			if right_wall_cast.is_colliding():
+				velocity = head.transform.basis * Vector3.LEFT * 7 + move_dir
+				velocity.y += 4
+				jumped = true
+
+func enter_crouch_state():
+	var prev_state = state
+	state = \"crouching\"
+	speed = CROUCH_SPEED
+	$CrouchAnimation.play(\"crouch\")
+	
+func enter_normal_state():
+	if !$head/CrouchCeilingDetection.is_colliding():
+		var prev_state = state
+		if prev_state == \"crouching\":
+			$CrouchAnimation.play_backwards(\"crouch\")
+		state = \"normal\"
+		speed = WALK_SPEED
+	
+func enter_sprint_state():
+	var prev_state = state
+	if prev_state == \"crouching\":
+		$CrouchAnimation.play_backwards(\"crouch\")
+	if prev_state != \"wallrunning\":
+		state = \"sprinting\"
+		speed = SPRINT_SPEED
+
+func _physics_process(delta):
+	velocity.y += -gravity * delta
+	var input_dir = Input.get_vector(\"left\",\"right\",\"up\",\"down\")
+	var move_dir = transform.basis * Vector3(input_dir.x, 0, input_dir.y)
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	if not is_on_wall():
+		if is_on_floor:
+			jumped = false
+		gravity = 6.8
+	if input_dir:
+		velocity.x =  move_dir.x * speed
+		velocity.z = move_dir.z * speed
+	else:
+		velocity.x = 0
+		velocity.z = 0
+	if is_on_floor() and Input.is_action_just_pressed(\"jump\"):
+		velocity.y = JUMP_VELOCITY
+	
+	if Input.is_action_just_pressed(\"pause\"):
+		get_tree().change_scene_to_file(\"res://pausemenu.tscn\")
+		
+	t_bob += delta * velocity.length() * float(is_on_floor())
+	camera.transform.origin = _headbob(t_bob)
+	
+	if Input.is_action_pressed(\"crouch\") and state != \"sprinting\":
+		if state != \"crouching\":
+			enter_crouch_state()
+	else:
+		enter_normal_state()
+	if state == \"crouching\":
+		speed = CROUCH_SPEED
+	if Input.is_action_pressed(\"crouch\") and state == \"crouching\":
+		$CrouchAnimation.play_backwards(\"crouch\")
+		state = \"normal\"
+		speed = WALK_SPEED
+	if Input.is_action_pressed(\"crouch\") and state == \"sprinting\":
+		enter_crouch_state()
+	if not Input.is_action_pressed(\"sprint\") and state == \"sprinting\":
+		enter_normal_state()
+		
+	if is_on_floor() and Input.is_action_pressed(\"sprint\"):
+		enter_sprint_state()
+
+	
+	move_and_slide()
+	wall_run(move_dir)
+	
+func _headbob(time) -> Vector3:
+	var pos = Vector3.ZERO
+	pos.y = sin(time * BOB_FREQ) * BOB_AMP
+	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP 
+	return pos
+
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		rotate_y(-event.relative.x * mouse_sensitivity)
+		camera.rotate_x(-event.relative.y * mouse_sensitivity)
+		camera.rotation.x = clamp(camera.rotation.x, -1, 1)
+
+
+
+
+
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8gmnh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_p0df5"]
+
+[sub_resource type="Animation" id="Animation_umwds"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.423697, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ens2n"]
+resource_name = "crouch"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.6, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.4, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.423697, 0), Vector3(0, -0.176, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eiwak"]
+_data = {
+"RESET": SubResource("Animation_umwds"),
+"crouch": SubResource("Animation_ens2n")
+}
+
+[node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
+script = SubResource("GDScript_jccc3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_8gmnh")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.423697, 0)
+
+[node name="CrouchCeilingDetection" type="ShapeCast3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07725, 0)
+shape = SubResource("SphereShape3D_p0df5")
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+
+[node name="RightWallCast" type="RayCast3D" parent="head"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="LeftWallCast" type="RayCast3D" parent="head"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CrouchAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_eiwak")
+}
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
