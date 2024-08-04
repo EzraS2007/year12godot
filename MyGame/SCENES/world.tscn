@@ -77,3 +77,19 @@ autoplay = "rise"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lava/Area3D" groups=["death"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.002, 0, 0.136902)
 shape = SubResource("BoxShape3D_if2la")
+
+[node name="lava2" parent="." instance=ExtResource("4_b8owm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.4365, -1.49372, -32.3364)
+script = ExtResource("5_f8s5r")
+
+[node name="lava3" parent="." instance=ExtResource("4_b8owm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.4365, -1.49372, 37.1546)
+script = ExtResource("5_f8s5r")
+
+[node name="lava4" parent="." instance=ExtResource("4_b8owm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.4365, -1.49372, -65.9835)
+script = ExtResource("5_f8s5r")
+
+[node name="lava5" parent="." instance=ExtResource("4_b8owm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.4235, -1.47541, 71.508)
+script = ExtResource("5_f8s5r")

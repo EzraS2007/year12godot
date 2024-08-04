@@ -1,9 +1,77 @@
-[gd_scene load_steps=2 format=3 uid="uid://bc07pypf7mnjw"]
+[gd_scene load_steps=6 format=3 uid="uid://bc07pypf7mnjw"]
 
 [ext_resource type="PackedScene" uid="uid://jsr6fibpe3ht" path="res://MODELS/bible.blend" id="1_2mpwk"]
+[ext_resource type="Script" path="res://MODELS/bible.gd" id="2_mnmof"]
+
+[sub_resource type="Animation" id="Animation_41jw7"]
+resource_name = "Swing"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8, 1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.154231, 0, -0.304318), Vector3(-0.154231, 0.0539575, -0.304318), Vector3(-0.0964933, 0.0539575, -0.403561), Vector3(-0.194251, 0.0539575, -0.447507), Vector3(-0.323503, 0.0539575, -0.366194), Vector3(-0.154, 0.054, -0.366)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8, 1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.404916), Vector3(-0.404916, 0, -0.404916), Vector3(-0.404916, 0, 0), Vector3(-0.607375, 0, 0.404916), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8cwa3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.154231, 0, -0.304318)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.404916)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_811y5"]
+_data = {
+"RESET": SubResource("Animation_8cwa3"),
+"Swing": SubResource("Animation_41jw7")
+}
 
 [node name="Weapon" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0776743, 0, 0.294516)
 
 [node name="bible" parent="." instance=ExtResource("1_2mpwk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.154231, 0, -0.304318)
+transform = Transform3D(0.919135, 0.393942, 0, -0.393942, 0.919135, 0, 0, 0, 1, -0.154231, 0, -0.304318)
+script = ExtResource("2_mnmof")
+
+[node name="AttackAnimation" type="AnimationPlayer" parent="bible"]
+libraries = {
+"": SubResource("AnimationLibrary_811y5")
+}

@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bcs7oso4cab6g"]
 
-[ext_resource type="Script" path="res://SCRIPTS/pausemenu.gd" id="1_2iree"]
+[ext_resource type="Script" path="res://SCRIPTS/pausemenu.gd" id="1_ug6hy"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
-script = ExtResource("1_2iree")
+script = ExtResource("1_ug6hy")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 8
