@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://chqr8e6ry3t1o"]
+
+[ext_resource type="PackedScene" uid="uid://dbgok5bgysj16" path="res://SCENES/scene.gltf" id="1_3iy88"]
+[ext_resource type="Script" path="res://SCENES/watergun.gd" id="2_4dwhu"]
+
+[sub_resource type="Animation" id="Animation_0o176"]
+resource_name = "kick"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0), Vector3(0, 1.5708, 0.202458), Vector3(0, 1.5708, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_itmh6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nla0w"]
+_data = {
+"RESET": SubResource("Animation_itmh6"),
+"kick": SubResource("Animation_0o176")
+}
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_3iy88")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("2_4dwhu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sketchfab_Scene"]
+libraries = {
+"": SubResource("AnimationLibrary_nla0w")
+}
+
+[node name="RayCast3D" type="RayCast3D" parent="Sketchfab_Scene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130667, 0.0335682, 5.71163e-09)
+target_position = Vector3(1, 0, 0)
