@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dde4532mig2i4"]
+[gd_scene load_steps=14 format=3 uid="uid://dde4532mig2i4"]
 
 [ext_resource type="Script" path="res://SCRIPTS/world.gd" id="1_reyds"]
 [ext_resource type="PackedScene" uid="uid://1au7io0bc6ur" path="res://SCENES/Character.tscn" id="2_r6t2v"]
 [ext_resource type="PackedScene" uid="uid://1ydrhk6blw3d" path="res://MODELS/Gamemapyr12.blend" id="3_3fe0w"]
 [ext_resource type="PackedScene" uid="uid://b52bcymypeq1d" path="res://MODELS/lava.blend" id="4_b8owm"]
 [ext_resource type="Script" path="res://SCRIPTS/lava.gd" id="5_f8s5r"]
+[ext_resource type="Texture2D" uid="uid://bydhrydxdttrw" path="res://MODELS/kloofendal_misty_morning_puresky_8k.hdr" id="6_giak0"]
 
 [sub_resource type="Animation" id="Animation_m18pb"]
 length = 0.001
@@ -46,6 +47,28 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_if2la"]
 size = Vector3(201.003, 1, 39.475)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_7uqre"]
+panorama = ExtResource("6_giak0")
+
+[sub_resource type="Sky" id="Sky_vmxbc"]
+sky_material = SubResource("PanoramaSkyMaterial_7uqre")
+
+[sub_resource type="Environment" id="Environment_dq8pr"]
+background_mode = 2
+sky = SubResource("Sky_vmxbc")
+ambient_light_color = Color(0.546429, 0, 0, 1)
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.89
+glow_strength = 2.0
+glow_bloom = 1.0
+fog_enabled = true
+fog_light_color = Color(0.308674, 0.0127921, 0.00182258, 1)
+fog_light_energy = 0.15
+fog_density = 0.02
+adjustment_enabled = true
+adjustment_brightness = 0.85
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_reyds")
@@ -93,3 +116,6 @@ script = ExtResource("5_f8s5r")
 [node name="lava5" parent="." instance=ExtResource("4_b8owm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.4235, -1.47541, 71.508)
 script = ExtResource("5_f8s5r")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dq8pr")
