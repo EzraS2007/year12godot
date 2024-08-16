@@ -3,21 +3,24 @@
 [ext_resource type="Script" path="res://bullet.gd" id="1_s3s3x"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3hp6q"]
-size = Vector3(0.05, 0.05, 1)
+size = Vector3(0.5, 0.05, 0.05)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1x5mv"]
 albedo_color = Color(0, 0.601652, 0.702071, 1)
 emission_enabled = true
 emission = Color(0.2811, 0.550293, 0.705989, 1)
 emission_energy_multiplier = 1.36
+fixed_size = true
 
 [node name="bullet" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0364401, 0, 0)
 script = ExtResource("1_s3s3x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.321267, 0, 0.0972256)
 mesh = SubResource("BoxMesh_3hp6q")
 surface_material_override/0 = SubResource("StandardMaterial3D_1x5mv")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.368958)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0.1)
 target_position = Vector3(0, 0, -1)

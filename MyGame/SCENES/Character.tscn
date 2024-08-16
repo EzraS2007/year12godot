@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://1au7io0bc6ur"]
+[gd_scene load_steps=9 format=3 uid="uid://1au7io0bc6ur"]
 
 [ext_resource type="PackedScene" uid="uid://chqr8e6ry3t1o" path="res://watergun.tscn" id="1_et2xm"]
 
@@ -146,9 +146,14 @@ func _unhandled_input(event):
 
 
 
+
+
+func _on_area_3d_area_entered(area: Area3D) -> void:
+	if area.is_in_group(\"death\"):
+		get_tree().reload_current_scene()
 "
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8gmnh"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noukt"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_p0df5"]
 
@@ -237,11 +242,15 @@ _data = {
 "crouch": SubResource("Animation_ens2n")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8gmnh"]
+
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
 script = SubResource("GDScript_jccc3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_8gmnh")
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_noukt")
 
 [node name="head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.423697, 0)
@@ -266,4 +275,8 @@ libraries = {
 "": SubResource("AnimationLibrary_eiwak")
 }
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_8gmnh")
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

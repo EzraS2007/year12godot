@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwv1hqkrie4ix"]
+
+[ext_resource type="PackedScene" uid="uid://c605ppv0tjcgk" path="res://SkeletonGR.fbx" id="1_xcb06"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SkeletonGR" parent="." instance=ExtResource("1_xcb06")]
+transform = Transform3D(2.38498e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, 2.38498e-09, 0, 0, 0)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="SkeletonGR"]
