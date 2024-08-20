@@ -1,10 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwv1hqkrie4ix"]
+[gd_scene load_steps=4 format=3 uid="uid://bwv1hqkrie4ix"]
 
 [ext_resource type="PackedScene" uid="uid://c605ppv0tjcgk" path="res://SkeletonGR.fbx" id="1_xcb06"]
+[ext_resource type="Script" path="res://skeleton_gr.gd" id="2_xqpkw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_utqne"]
+radius = 2.369
+height = 12.215
 
 [node name="Node3D" type="Node3D"]
 
 [node name="SkeletonGR" parent="." instance=ExtResource("1_xcb06")]
 transform = Transform3D(2.38498e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, 2.38498e-09, 0, 0, 0)
+script = ExtResource("2_xqpkw")
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="SkeletonGR"]
+
+[node name="Area3D" type="Area3D" parent="SkeletonGR"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SkeletonGR/Area3D"]
+transform = Transform3D(1, 0, 2.66454e-15, 0, 1, 0, -2.66454e-15, 0, 1, 0, 6.1967, 0)
+shape = SubResource("CapsuleShape3D_utqne")

@@ -1,7 +1,7 @@
 extends Node3D
 
 const SPEED = 35.0
-
+var velocity = Vector3.ZERO
 @onready var mesh = $MeshInstance3D
 @onready var ray = $RayCast3D
 
@@ -12,4 +12,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position += transform.basis.z * Vector3(0,0, -SPEED) * delta
+	transform.origin += velocity * delta

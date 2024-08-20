@@ -11,7 +11,7 @@ const WALK_SPEED = 5
 const SPRINT_SPEED = 7
 const CROUCH_SPEED = 3.0
 
-@onready var gun_barrel = $head/Camera3D/Node3D/Sketchfab_Scene/RayCast3D
+@onready var gun_barrel = $head/Camera3D/Barrel
 var bullet = load(\"res://bullet.tscn\")
 var instance
 
@@ -121,9 +121,10 @@ func _physics_process(delta):
 		if !gun.is_playing():
 			gun.play(\"kick\")
 			instance = bullet.instantiate()
-			instance.position = gun_barrel.global_position
-			instance.transform.basis = gun_barrel.global_transform.basis
-			get_parent().add_child(instance)
+			add_sibling(instance)
+			instance.transform = gun_barrel.global_transform
+			instance.velocity = -instance.transform.basis.z * instance.SPEED
+			
 
 
 	
@@ -263,6 +264,9 @@ shape = SubResource("SphereShape3D_p0df5")
 
 [node name="Node3D" parent="head/Camera3D" instance=ExtResource("1_et2xm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.191903, -0.141303, -0.256332)
+
+[node name="Barrel" type="Marker3D" parent="head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.195479, -0.0997691, -0.393165)
 
 [node name="RightWallCast" type="RayCast3D" parent="head"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
