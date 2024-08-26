@@ -1,4 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkpveltyl3g4e"]
+[gd_scene load_steps=8 format=3 uid="uid://bkpveltyl3g4e"]
+
+[ext_resource type="Texture2D" uid="uid://7ydmmu5s4chk" path="res://gamepfp.PNG" id="1_2kb8d"]
+[ext_resource type="FontFile" uid="uid://b37nbu7o2v4ad" path="res://Rudisfave demo.otf" id="2_2fsmv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fcji"]
+bg_color = Color(0.760784, 0, 0.192157, 1)
+draw_center = false
+border_width_left = 125
+border_width_right = 125
+border_color = Color(0.294118, 0, 0.0235294, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4m282"]
+bg_color = Color(0.760784, 0, 0.192157, 1)
+border_width_left = 100
+border_width_right = 100
+border_color = Color(0.293275, 0, 0.0223794, 1)
+border_blend = true
 
 [sub_resource type="GDScript" id="GDScript_7a73c"]
 script/source = "extends Button
@@ -26,6 +43,20 @@ func _on_quit_button_pressed():
 	get_tree().quit()
 "
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1pvqp"]
+bg_color = Color(0.760784, 0, 0.192157, 1)
+border_width_left = 100
+border_width_right = 100
+border_color = Color(0.293275, 0, 0.0223794, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j35vr"]
+bg_color = Color(0.760784, 0, 0.192157, 1)
+border_width_left = 100
+border_width_right = 100
+border_color = Color(0.293275, 0, 0.0223794, 1)
+border_blend = true
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -33,6 +64,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Gamepfp" type="Sprite2D" parent="."]
+position = Vector2(566, 320)
+texture = ExtResource("1_2kb8d")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -52,6 +87,9 @@ offset_right = 92.0
 offset_bottom = -61.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_2fsmv")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_1fcji")
 text = "HELLFIRE: REDEMPTION"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -73,15 +111,18 @@ layout_mode = 2
 
 [node name="start button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4m282")
 text = "START GAME"
 script = SubResource("GDScript_7a73c")
 
 [node name="Button2" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1pvqp")
 text = "OPTIONS"
 
 [node name="quit button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_j35vr")
 text = "QUIT"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/start button" to="MarginContainer/VBoxContainer/start button" method="_on_pressed"]
