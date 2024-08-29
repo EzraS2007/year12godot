@@ -103,6 +103,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.358578, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.002, 0, 0.136902)
 shape = SubResource("BoxShape3D_if2la")
 
+[node name="lava6" parent="." instance=ExtResource("4_b8owm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.4365, -1.49372, 2.47548)
+script = ExtResource("5_f8s5r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="lava6"]
+libraries = {
+"": SubResource("AnimationLibrary_bi7ei")
+}
+autoplay = "rise"
+
+[node name="Area3D" type="Area3D" parent="lava6" groups=["death"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.358578, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="lava6/Area3D" groups=["death"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.002, 0, 0.136902)
+shape = SubResource("BoxShape3D_if2la")
+
 [node name="lava2" parent="." instance=ExtResource("4_b8owm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.4365, -1.49372, -32.3364)
 script = ExtResource("5_f8s5r")
