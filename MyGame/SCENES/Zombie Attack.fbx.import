@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c605ppv0tjcgk"
-path="res://.godot/imported/SkeletonGR.fbx-5c3d60c3af17a3deaf30640e146df9cc.scn"
+uid="uid://bl0ugcxcue0uu"
+path="res://.godot/imported/Zombie Attack.fbx-59b2c2b3fe0f3f96d648e2e6cf6815c3.scn"
 
 [deps]
 
-source_file="res://SkeletonGR.fbx"
-dest_files=["res://.godot/imported/SkeletonGR.fbx-5c3d60c3af17a3deaf30640e146df9cc.scn"]
+source_file="res://SCENES/Zombie Attack.fbx"
+dest_files=["res://.godot/imported/Zombie Attack.fbx-59b2c2b3fe0f3f96d648e2e6cf6815c3.scn"]
 
 [params]
 

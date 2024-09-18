@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bwv1hqkrie4ix"]
 
-[ext_resource type="PackedScene" uid="uid://c605ppv0tjcgk" path="res://SkeletonGR.fbx" id="1_xcb06"]
-[ext_resource type="Script" path="res://skeleton_gr.gd" id="2_xqpkw"]
+[ext_resource type="PackedScene" uid="uid://c605ppv0tjcgk" path="res://SCENES/SkeletonGR.fbx" id="1_xcb06"]
+[ext_resource type="Script" path="res://SCRIPTS/skeleton_gr.gd" id="2_xqpkw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_utqne"]
 radius = 2.369

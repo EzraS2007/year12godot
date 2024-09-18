@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ddftrlcck3d0s"]
 
-[ext_resource type="Script" path="res://bullet.gd" id="1_s3s3x"]
+[ext_resource type="Script" path="res://SCRIPTS/bullet.gd" id="1_7tami"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3hp6q"]
 size = Vector3(0.05, 0.05, 0.5)
@@ -12,7 +12,7 @@ emission = Color(0.2811, 0.550293, 0.705989, 1)
 emission_energy_multiplier = 1.36
 
 [node name="bullet" type="Node3D"]
-script = ExtResource("1_s3s3x")
+script = ExtResource("1_7tami")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_3hp6q")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://1au7io0bc6ur"]
 
-[ext_resource type="PackedScene" uid="uid://chqr8e6ry3t1o" path="res://watergun.tscn" id="1_et2xm"]
+[ext_resource type="PackedScene" uid="uid://chqr8e6ry3t1o" path="res://SCENES/watergun.tscn" id="1_et2xm"]
 
 [sub_resource type="GDScript" id="GDScript_jccc3"]
 script/source = "extends CharacterBody3D
@@ -93,7 +93,7 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 	
 	if Input.is_action_just_pressed(\"pause\"):
-		get_tree().change_scene_to_file(\"res://pausemenu.tscn\")
+		get_tree().change_scene_to_file(\"res://SCENES/pausemenu.tscn\")
 		
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob)
