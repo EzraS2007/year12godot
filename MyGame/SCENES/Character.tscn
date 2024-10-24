@@ -1,6 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://1au7io0bc6ur"]
+[gd_scene load_steps=11 format=3 uid="uid://1au7io0bc6ur"]
 
 [ext_resource type="PackedScene" uid="uid://chqr8e6ry3t1o" path="res://SCENES/watergun.tscn" id="1_et2xm"]
+[ext_resource type="PackedScene" uid="uid://iy2jxn8afk4i" path="res://timer.tscn" id="2_hlqsy"]
+[ext_resource type="Texture2D" uid="uid://dhqr0beiaoqxb" path="res://heart.webp" id="3_hpug8"]
 
 [sub_resource type="GDScript" id="GDScript_jccc3"]
 script/source = "extends CharacterBody3D
@@ -14,6 +16,8 @@ const CROUCH_SPEED = 3.0
 @onready var gun_barrel = $head/Camera3D/Barrel
 var bullet = load(\"res://bullet.tscn\")
 var instance
+@onready var ray_cast_3d: RayCast3D = $head/Camera3D/RayCast3D
+@onready var label: Label = $CanvasLayer2/Label
 
 @onready var gun = $head/Camera3D/Node3D/Sketchfab_Scene/AnimationPlayer
 
@@ -125,6 +129,13 @@ func _physics_process(delta):
 			instance.transform = gun_barrel.global_transform
 			instance.velocity = -instance.transform.basis.z * instance.SPEED
 			
+	if ray_cast_3d.is_colliding():
+		if ray_cast_3d.get_collider().is_in_group(\"door\"):
+			label.show()
+		if Input.is_action_pressed(\"interact\"):
+			get_tree().change_scene_to_file(\"res://heaven.tscn\")
+	else:
+		label.hide()
 
 
 	
@@ -145,13 +156,9 @@ func _unhandled_input(event):
 
 
 
-
-
-
-
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	if area.is_in_group(\"death\"):
-		get_tree().reload_current_scene()
+		get_tree().change_scene_to_file(\"res://SCENES/death.tscn\")
 "
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noukt"]
@@ -263,10 +270,13 @@ shape = SubResource("SphereShape3D_p0df5")
 [node name="Camera3D" type="Camera3D" parent="head"]
 
 [node name="Node3D" parent="head/Camera3D" instance=ExtResource("1_et2xm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.191903, -0.141303, -0.256332)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.191903, -0.141303, -0.344119)
 
 [node name="Barrel" type="Marker3D" parent="head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.195479, -0.0997691, -0.393165)
+
+[node name="RayCast3D" type="RayCast3D" parent="head/Camera3D"]
+transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, 0, 0)
 
 [node name="RightWallCast" type="RayCast3D" parent="head"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -281,6 +291,23 @@ libraries = {
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_8gmnh")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("2_hlqsy")]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer2"]
+visible = false
+offset_left = 588.0
+offset_top = 234.0
+offset_right = 628.0
+offset_bottom = 257.0
+text = "Push E to Open"
+
+[node name="Heart" type="Sprite2D" parent="."]
+position = Vector2(44, 596)
+scale = Vector2(0.046875, 0.0508621)
+texture = ExtResource("3_hpug8")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

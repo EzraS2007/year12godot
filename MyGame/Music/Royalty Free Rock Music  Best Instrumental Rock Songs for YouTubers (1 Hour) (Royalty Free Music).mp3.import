@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bk773mg3dypap"
+path="res://.godot/imported/Royalty Free Rock Music  Best Instrumental Rock Songs for YouTubers (1 Hour) (Royalty Free Music).mp3-fc7e6fabf04a2aac4a517317a1c98d70.mp3str"
+
+[deps]
+
+source_file="res://Music/Royalty Free Rock Music  Best Instrumental Rock Songs for YouTubers (1 Hour) (Royalty Free Music).mp3"
+dest_files=["res://.godot/imported/Royalty Free Rock Music  Best Instrumental Rock Songs for YouTubers (1 Hour) (Royalty Free Music).mp3-fc7e6fabf04a2aac4a517317a1c98d70.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

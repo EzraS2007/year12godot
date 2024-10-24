@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://da3qkvs8h542r"]
+
+[ext_resource type="PackedScene" uid="uid://nomodk7a1drn" path="res://MODELS/heaven.blend" id="1_agroa"]
+[ext_resource type="Script" path="res://heaven.gd" id="1_b3ksv"]
+[ext_resource type="PackedScene" uid="uid://1au7io0bc6ur" path="res://SCENES/Character.tscn" id="2_8vjs8"]
+[ext_resource type="Texture2D" uid="uid://bydhrydxdttrw" path="res://MODELS/kloofendal_misty_morning_puresky_8k.hdr" id="4_3ja16"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_664pa"]
+panorama = ExtResource("4_3ja16")
+
+[sub_resource type="Sky" id="Sky_vmxbc"]
+sky_material = SubResource("PanoramaSkyMaterial_664pa")
+
+[sub_resource type="Environment" id="Environment_e3w68"]
+background_mode = 2
+sky = SubResource("Sky_vmxbc")
+ambient_light_color = Color(0.546429, 0, 0, 1)
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.89
+glow_strength = 2.0
+glow_bloom = 1.0
+fog_enabled = true
+fog_light_color = Color(0.391913, 0.851492, 0.850482, 1)
+fog_light_energy = 0.15
+fog_density = 0.02
+adjustment_enabled = true
+adjustment_brightness = 0.85
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_b3ksv")
+
+[node name="heaven" parent="." instance=ExtResource("1_agroa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0842917, 0, -0.0762432)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_8vjs8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24745, 0.515444)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.150346, 0.988633, 0, -0.988633, -0.150346, 21.6957, 38.3677, -0.777503)
+light_energy = 1.121
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e3w68")

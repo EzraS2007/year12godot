@@ -11,7 +11,7 @@ emission_enabled = true
 emission = Color(0.2811, 0.550293, 0.705989, 1)
 emission_energy_multiplier = 1.36
 
-[node name="bullet" type="Node3D"]
+[node name="bullet" type="Node3D" groups=["bullet"]]
 script = ExtResource("1_7tami")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

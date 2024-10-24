@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwiauxgylmeaj"]
+
+[ext_resource type="AudioStream" uid="uid://bk773mg3dypap" path="res://Music/Royalty Free Rock Music  Best Instrumental Rock Songs for YouTubers (1 Hour) (Royalty Free Music).mp3" id="1_v2lqr"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_v2lqr")
+volume_db = -15.927
+autoplay = true

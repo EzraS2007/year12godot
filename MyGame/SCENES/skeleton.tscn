@@ -17,6 +17,6 @@ script = ExtResource("2_xqpkw")
 
 [node name="Area3D" type="Area3D" parent="SkeletonGR"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkeletonGR/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SkeletonGR/Area3D" groups=["skeleton"]]
 transform = Transform3D(1, 0, 2.66454e-15, 0, 1, 0, -2.66454e-15, 0, 1, 0, 6.1967, 0)
 shape = SubResource("CapsuleShape3D_utqne")
